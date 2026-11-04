@@ -31,13 +31,15 @@
 | Gerrit 项目 | GitHub 仓库 | repo 里的路径 | 内容 |
 |---|---|---|---|
 | `imx6ull/manifest` | — | `.repo/manifests` | 清单本身 |
-| `imx6ull/build` | `imx6ull_build` | `build/` | build.sh / 分区 / 文档 |
+| `imx6ull/build` | `imx6ull_build` | `build/` | build.sh / 分区方案 |
+| `imx6ull/docs` | `imx6ull_docs` | `docs/` | 21 篇文档 + 上板日志 |
 | `imx6ull/rt-thread` | `imx6ull_rt-thread` | `rtthread/` | RT-Thread Smart 内核 |
 | `imx6ull/uboot` | `imx6ull_uboot` | `uboot/` | U-Boot + SPL |
 | `imx6ull/packages` | `imx6ull_packages` | `packages/` | 包索引 |
 | `imx6ull/userapps` | `imx6ull_userapps` | `userapps/` | 用户态工程 |
 
 Gerrit 里叫 `build`，GitHub 上叫 `imx6ull_build`——**映射写死在镜像脚本里**。
+`docs` / `rt-thread` 等其余仓库两边同名。
 
 ---
 
@@ -259,6 +261,7 @@ repo upload .                            # 推 refs/for/<分支>
   <default revision="main" remote="gerrit" sync-j="4" sync-c="true" />
 
   <project name="imx6ull/build"     path="build"    />
+  <project name="imx6ull/docs"      path="docs"     />
   <project name="imx6ull/rt-thread" path="rtthread" />
   <project name="imx6ull/uboot"     path="uboot"    />
   <project name="imx6ull/packages"  path="packages" />
@@ -319,6 +322,8 @@ repo init -u <manifest-url> -m imx6ull-debug.xml
 | `repo sync` 后代码改动没了 | 在 detached HEAD 上提交 | 改代码前 `repo start <分支> .` |
 | `repo upload` 说没有远程 | manifest 里 remote 少了 `review` | 补 `review="http://localhost:8080/"` |
 | Gerrit 打不开 | WSL 里的服务没起 | `~/gerrit-env/gerrit-ctl.sh start` |
+| 推 GitHub 报 `Permission denied (publickey)`，但推 Gerrit 正常 | **`GIT_SSH_COMMAND` 里 `-i` 指了 Gerrit 的 key**，把默认 `id_rsa` 顶掉了 | 访问 GitHub 时别设 `GIT_SSH_COMMAND`，或显式 `-i ~/.ssh/id_rsa` |
+| 推 GitHub 报 `! [rejected] main -> main (fetch first)` | GitHub 仓库建的时候勾了 README，多了个 `Initial commit` | 确认对方只有 README 后 `git push --force` |
 
 ---
 
@@ -338,7 +343,7 @@ repo init -u <manifest-url> -m imx6ull-debug.xml
 | 项 | 值 |
 |---|---|
 | Gerrit | 3.12.11，`http://localhost:8080/`，账号 `guoqiangh` |
-| 项目 | 6 个：manifest / build / rt-thread / uboot / packages / userapps |
-| 工作区 | `~/50_workspace/rtt_smart_imx6ull`（已 sync，5 个仓库就位，2.2 GB） |
-| 待评审 | Change 21（`imx6ull/build` 的改名说明） |
+| 项目 | **7 个**：manifest / build / docs / rt-thread / uboot / packages / userapps |
+| 工作区 | `~/50_workspace/rtt_smart_imx6ull`（已 sync，6 个仓库就位）<br>另有一份快照在 `Z:\guoqiangh\50_workspace\rtt_smart_imx6ull` |
+| GitHub | 6 个仓库全对齐（`imx6ull_manifest` 未建，manifest 只存 Gerrit） |
 | 未纳入 | `02_vendor/`（254 MB 厂商资料，无对应仓库） |

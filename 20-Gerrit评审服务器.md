@@ -20,6 +20,7 @@ All-Users
 imx6ull/build        ← 板级工程（build 脚本 / 分区方案 / 文档）
 imx6ull/rt-thread      ← 内核
 imx6ull/uboot          ← U-Boot + SPL
+imx6ull/docs          ← 项目文档（21 篇 + 日志）
 imx6ull/packages       ← RT-Thread 包索引
 imx6ull/userapps       ← 用户态
 ```
@@ -31,6 +32,7 @@ imx6ull/userapps       ← 用户态
 | `imx6ull/build` | `0f87113` | 40 | 260 K | `build/` `spl/` `01_docs/` `README.md` |
 | `imx6ull/rt-thread` | `cd08385` | 38,753 | **464 M** | RT-Thread Smart 5.4.0 全树（含 BSP 与 NXP SDK） |
 | `imx6ull/uboot` | `1f74215` | 39,054 | 56 M | U-Boot v2026.10 全树（含 SPL） |
+| `imx6ull/docs` | `b2b2f8c` | 28 | 200 K | 21 篇文档 + 上板日志 |
 | `imx6ull/packages` | `7662983` | 1,829 | 1.2 M | RT-Thread 包索引快照 |
 | `imx6ull/userapps` | `8dbc0ca` | 276 | 3.9 M | 用户态工程快照 |
 
